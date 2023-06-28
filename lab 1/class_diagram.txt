@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+class Профиль {
+  +name : string
+  -email : string
+  -phone : string
+  +sendMessage() : void
+}
+class Пользователь {
+  +regdate : date
+  +chatlist : array
+}
+class Администратор {
+  +banUser(user) : void
+  +sendConfirmCode(sendTo) : void
+  +createProfile() : void
+}
+class Сервер {
+  -address : string
+  +getMessages() : string
+  +getUserList() : array
+}
+class Сообщение {
+  +text : string
+  +timest : timestamp
+  +sender : user
+  +chat : chat
+  +sendNotification() : void
+}
+
+Профиль --> Пользователь : extends
+Профиль --> Администратор : extends
+Администратор --> Пользователь : регистрирует
+Пользователь --> Сообщение : отправляет
+Сервер --> Сообщение : записывает в базу
+@enduml

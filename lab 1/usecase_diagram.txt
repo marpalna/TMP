@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+
+actor Пользователь
+actor Администратор
+
+usecase "Регистрация" as UC1
+usecase "Вход в систему" as UC2
+usecase "Выход из системы" as UC3
+usecase "Редактирование профиля" as UC4
+usecase "Изменение номера телефона" as UC5
+usecase "Изменение имя пользователя" as UC6
+usecase "Отправка сообщения" as UC7
+usecase "Отправить текст" as UC8
+usecase "Отправить фото" as UC9
+usecase "Отправка кода подтверждения" as UC10
+usecase "Бан пользователя" as UC11
+
+
+Пользователь --> UC1
+Пользователь --> UC2
+UC2 ..> UC3 : extends
+Пользователь --> UC4
+UC4 ..> UC5 : include
+UC4 ..> UC6 : include
+Пользователь --> UC7
+UC7 ..> UC8 : include
+UC7 ..> UC9 : include
+UC1 --> Администратор
+Администратор --> UC10
+Администратор --> UC11
+@enduml
