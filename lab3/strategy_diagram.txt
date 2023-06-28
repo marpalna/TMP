@@ -1,0 +1,24 @@
+@startuml
+class DrinkStrategy {
+    +prepare(): void
+}
+
+class TeaStrategy {
+    +prepare(): void
+}
+
+class CoffeeStrategy {
+    +prepare(): void
+}
+
+class Cafe {
+    -drink_strategy: DrinkStrategy
+    +__init__(drink_strategy: DrinkStrategy)
+    +order_drink(): void
+    +set_drink_strategy(drink_strategy: DrinkStrategy): void
+}
+
+DrinkStrategy <|-down- TeaStrategy
+DrinkStrategy <|-down- CoffeeStrategy
+Cafe o-> DrinkStrategy
+@enduml

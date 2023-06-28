@@ -1,0 +1,24 @@
+@startuml
+abstract class DrinkMaker {
+    +prepare(): void
+    +boil_water(): void
+    +brew(): void
+    +pour(): void
+    +add_condiments(): void
+    +customer_wants_condiments(): boolean
+}
+
+class TeaMaker {
+    +brew(): void
+    +add_condiments(): void
+}
+
+class CoffeeMaker {
+    +brew(): void
+    +add_condiments(): void
+    +customer_wants_condiments(): boolean
+}
+
+DrinkMaker <|-down- TeaMaker
+DrinkMaker <|-down- CoffeeMaker
+@enduml
