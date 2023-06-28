@@ -1,0 +1,23 @@
+@startuml
+
+interface IBankAccount {
+    + GetAccountNumber(): string
+    + GetBalance(): decimal
+}
+
+class ThirdPartyBankAccount {
+    + AccountNumber: string
+    + Balance: double
+}
+
+class BankAccountAdapter {
+    - thirdPartyBankAccount: ThirdPartyBankAccount
+    + BankAccountAdapter(thirdPartyBankAccount: ThirdPartyBankAccount)
+    + GetAccountNumber(): string
+    + GetBalance(): decimal
+}
+
+IBankAccount <|.. BankAccountAdapter
+BankAccountAdapter --> ThirdPartyBankAccount
+
+@enduml

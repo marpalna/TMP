@@ -1,0 +1,22 @@
+@startuml
+
+interface IBalanceChecker {
+    + GetBalance(accountNumber: string): decimal
+}
+
+class ExternalBalanceChecker {
+    + GetBalance(accountNumber: string): decimal
+}
+
+class BalanceCheckerProxy {
+    - balanceChecker: IBalanceChecker
+    - balanceCache: Dictionary<string, decimal>
+    + BalanceCheckerProxy(balanceChecker: IBalanceChecker)
+    + GetBalance(accountNumber: string): decimal
+}
+
+IBalanceChecker <|.. ExternalBalanceChecker
+IBalanceChecker <|.. BalanceCheckerProxy
+BalanceCheckerProxy o-- IBalanceChecker
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+
+abstract class Account {
+    - accountNumber: string
+    + Account(accountNumber: string)
+    + GetBalance(): decimal
+}
+
+class BankAccount {
+    - balance: decimal
+    + BankAccount(accountNumber: string, balance: decimal)
+    + GetBalance(): decimal
+}
+
+class BankAccountGroup {
+    - accounts: List<Account>
+    + BankAccountGroup(accountNumber: string)
+    + AddAccount(account: Account): void
+    + GetBalance(): decimal
+}
+
+Account <|-- BankAccount
+Account <|-- BankAccountGroup
+BankAccountGroup o-- Account
+
+@enduml

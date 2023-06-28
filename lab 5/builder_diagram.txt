@@ -1,0 +1,38 @@
+@startuml
+
+class BankAccount {
+    + AccountNumber: string
+    + Balance: decimal
+    + AccountHolder: string
+    + AccountType: string
+}
+
+interface IBankAccountBuilder {
+    + SetAccountNumber(accountNumber: string): void
+    + SetBalance(balance: decimal): void
+    + SetAccountHolder(accountHolder: string): void
+    + SetAccountType(accountType: string): void
+    + GetBankAccount(): BankAccount
+}
+
+class BankAccountBuilder {
+    - bankAccount: BankAccount
+    + SetAccountNumber(accountNumber: string): void
+    + SetBalance(balance: decimal): void
+    + SetAccountHolder(accountHolder: string): void
+    + SetAccountType(accountType: string): void
+    + GetBankAccount(): BankAccount
+}
+
+class BankAccountDirector {
+    - bankAccountBuilder: IBankAccountBuilder
+    + CreateBankAccount(accountNumber: string, balance: decimal, accountHolder: string, accountType: string): void
+    + GetBankAccount(): BankAccount
+}
+
+BankAccountBuilder ..|> IBankAccountBuilder
+BankAccountDirector--> IBankAccountBuilder
+BankAccountDirector --> BankAccountBuilder
+BankAccountBuilder --> BankAccount
+
+@enduml

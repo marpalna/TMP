@@ -1,0 +1,20 @@
+@startuml
+
+interface IBalanceChecker {
+    + GetBalance(accountNumber: string): decimal
+}
+
+class ExternalBalanceChecker {
+    + GetBalance(accountNumber: string): decimal
+}
+
+class BankClient {
+    - balanceChecker: IBalanceChecker
+    + BankClient(balanceChecker: IBalanceChecker)
+    + CheckBalance(accountNumber: string): bool
+}
+
+IBalanceChecker <|.. ExternalBalanceChecker
+BankClient --> IBalanceChecker
+
+@enduml

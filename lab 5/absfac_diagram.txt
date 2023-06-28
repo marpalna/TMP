@@ -1,0 +1,67 @@
+@startuml
+
+interface IBankAccount {
+    + Deposit(amount: decimal): void
+    + Withdraw(amount: decimal): void
+    + GetBalance(): decimal
+}
+
+interface ICreditCard {
+    + MakePayment(amount: decimal): bool
+    + GetBalance(): decimal
+}
+
+interface ICreditProduct {
+    + GetInterestRate(): decimal
+    + GetMonthlyPayment(principal: decimal, term: int): decimal
+}
+
+abstract class BankFactory {
+    + CreateBankAccount(accountNumber: string, balance: decimal): IBankAccount
+    + CreateCreditCard(cardNumber: string, balance: decimal): ICreditCard
+    + CreateCreditProduct(principal: decimal, term: int): ICreditProduct
+}
+
+class AlphaBankAccount {
+    - accountNumber: string
+    - balance: decimal
+    + Deposit(amount: decimal): void
+    + Withdraw(amount: decimal): void
+    + GetBalance(): decimal
+}
+
+class AlphaCreditCard {
+    - cardNumber: string
+    - balance: decimal
+    + MakePayment(amount: decimal): bool
+    + GetBalance(): decimal
+}
+
+class AlphaCreditProduct {
+    - principal: decimal
+    - term: int
+    + GetInterestRate(): decimal
+    + GetMonthlyPayment(principal: decimal, term: int): decimal
+}
+
+class AlphaBankFactory {
+    + CreateBankAccount(accountNumber: string, balance: decimal): IBankAccount
+    + CreateCreditCard(cardNumber: string, balance: decimal): ICreditCard
+    + CreateCreditProduct(principal: decimal, term: int): ICreditProduct
+}
+
+class BankClient {
+    - factory: BankFactory
+    + OpenBankAccount(accountNumber: string, initialDeposit: decimal): IBankAccount
+    + ApplyForCreditCard(cardNumber: string, creditLimit: decimal): ICreditCard
+    + ApplyForCreditProduct(principal: decimal, term: int): ICreditProduct
+}
+
+BankFactory <|-- AlphaBankFactory
+IBankAccount <|.. AlphaBankAccount
+ICreditCard <|.. AlphaCreditCard
+ICreditProduct <|.. AlphaCreditProduct
+BankFactory <|-- AlphaBankFactory
+BankClient --> BankFactory
+
+@enduml
