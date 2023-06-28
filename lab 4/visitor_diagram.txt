@@ -1,0 +1,30 @@
+@startuml
+interface IBankAccountVisitor {
+    + Visit(CreditAccount account)
+    + Visit(SavingsAccount account)
+}
+
+abstract class BankAccount {
+    + AccountNumber : string
+    + Balance : decimal
+    + Accept(visitor: IBankAccountVisitor) : void
+}
+
+class CreditAccount {
+    + Accept(visitor: IBankAccountVisitor) : void
+}
+
+class SavingsAccount {
+    + Accept(visitor: IBankAccountVisitor) : void
+}
+
+class BankReport {
+    + Visit(CreditAccount account) : void
+    + Visit(SavingsAccount account) : void
+}
+
+BankAccount <|-- CreditAccount 
+BankAccount <|-- SavingsAccount
+
+IBankAccountVisitor <|.. BankReport
+@enduml

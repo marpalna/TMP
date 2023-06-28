@@ -1,0 +1,29 @@
+@startuml
+interface IEnumerator<BankAccount> {
+  + Current: BankAccount
+  + MoveNext(): bool
+  + Reset(): void
+}
+
+interface IEnumerable<BankAccount> {
+  + GetEnumerator(): IEnumerator<BankAccount>
+}
+
+class BankAccounts {
+  - accounts: List<BankAccount>
+  + GetEnumerator(): IEnumerator<BankAccount>
+  + AddAccount(account: BankAccount): void
+}
+
+class BankAccount {
+  - accountNumber: string
+  - balance: decimal
+  + AccountNumber: string
+  + Balance: decimal
+}
+
+BankAccounts -> IEnumerable
+BankAccounts ..> BankAccount
+BankAccount -up-|> IEnumerator
+BankAccount ..> BankAccounts: contains
+@enduml
